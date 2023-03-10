@@ -12,26 +12,15 @@
       }
       
       function showPosition(position) {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', `/location?lat=${latitude}&long=${longitude}`);
-        xhr.onload = function() {
-          const data = JSON.parse(xhr.responseText);
-          document.getElementById("latitude").innerHTML = data.latitude;
-          document.getElementById("longitude").innerHTML = data.longitude;
-        };
-        xhr.send();
+        document.getElementById("latitude").innerHTML = position.coords.latitude;
+        document.getElementById("longitude").innerHTML = position.coords.longitude;
       }
-      </script>
-      </head>
+    </script>
+  </head>
   <body>
     <h1>Get User Location</h1>
     <button onclick="getLocation()">Get Location</button>
-
     <p>Latitude: <span id="latitude"></span></p>
     <p>Longitude: <span id="longitude"></span></p>
-    <button onclick="window.href='/location'">Update</button>
-
   </body>
 </html>

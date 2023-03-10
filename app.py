@@ -19,8 +19,8 @@ def update_location():
     print("lattitude", latitude)
     print("Longitude", longitude)
     location = geolocator.reverse(f"{latitude}, {longitude}", zoom=18)
-    print(location)
-    return location
+    out=location
+    return f"<br>Your Address: {out}"
 
 if __name__ == '__main__':
     app.run()

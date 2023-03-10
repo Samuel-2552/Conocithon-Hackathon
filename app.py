@@ -9,11 +9,13 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/location', methods=['GET'])
-def location():
-    latitude = request.args.get('lat')
-    longitude = request.args.get('long')
-    return jsonify({'latitude': latitude, 'longitude': longitude})
+@app.route('/update-location', methods=['POST'])
+def update_location():
+    data = request.get_json()
+    latitude = data['latitude']
+    longitude = data['longitude']
+    # Do something with the latitude and longitude values
+    return 'Location updated successfully!'
 
 if __name__ == '__main__':
     app.run()

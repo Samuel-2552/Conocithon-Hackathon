@@ -15,6 +15,8 @@ def update_location():
     latitude = data['latitude']
     longitude = data['longitude']
     # Do something with the latitude and longitude values
+    print("lattitude", latitude)
+    print("Longitude", longitude)
     return 'Location updated successfully!'
 
 if __name__ == '__main__':

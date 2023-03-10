@@ -12,12 +12,15 @@ def index():
 @app.route('/update-location', methods=['POST'])
 def update_location():
     data = request.get_json()
+    geolocator = Nominatim(user_agent="my-app-name")
     latitude = data['latitude']
     longitude = data['longitude']
     # Do something with the latitude and longitude values
     print("lattitude", latitude)
     print("Longitude", longitude)
-    return 'Location updated successfully!'
+    location = geolocator.reverse(f"{latitude}, {longitude}", zoom=18)
+    print(location)
+    return location
 
 if __name__ == '__main__':
     app.run()

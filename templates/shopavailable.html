@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    .navbar a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+    .toggle {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+
+		.toggle button {
+			font-size: 20px;
+			padding: 10px 20px;
+			margin: 0 10px;
+			border: none;
+			border-radius: 20px;
+			color: #fff;
+			background-color: #333;
+			cursor: pointer;
+		}
+
+		.toggle button.active {
+			background-color: green;
+		}
+
+		.toggle button:not(.active):hover {
+			background-color: #555;
+		}
+
+    </style>
+</head>
+    <body>
+
+    <div class="">
+        <div class="os-windows">
+            <div class="containers__HeaderContainer-sc-1t9i1pe-0 UjObT">
+                <header class="Header__HeaderContainer-sc-hejxrh-1 etwMDu" style="background-color: rgb(179, 255, 80);">
+                    <div class="Header__HeaderLeft-sc-hejxrh-2 gUZOTl" >
+                        <img src="{{logo}}" height="80px" width="80px"  alt="Logo">
+                        <div class="VerticalDivider__Divider-sc-9aw8k8-0 jdUpJX"></div>
+                        <!-- <div class="LocationBar__Container-sc-x8ezho-6 gcLVHe">Select Location</div> -->
+                    </div>
+                    <!-- <div style="display: block;position:relative; top:50%;">
+                        <form>
+                            <input type="search" placeholder="Search Location"/>
+                        </form>
+                    </div>
+                    <div class="Header__HeaderRight-sc-hejxrh-3 dVsawd">
+                        <div class="ProfileButton__Container-sc-975teb-3 liSUTa">
+                            <div class="ProfileButton__Text-sc-975teb-2 bFHCDW">Login</div>
+                        </div>
+                        <div class="CartButton__Container-sc-1fuy2nj-3 eOczDn">
+                            <div class="CartButton__Button-sc-1fuy2nj-5 joEvaa">
+                                <div class="CartButton__Text-sc-1fuy2nj-4 iQAgjV">My Cart</div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div style="display: flex; width: 100%;height: 100%;flex-grow: 1;justify-content: space-around;align-items: center;">
+                        <!-- <div style="position:absolute; width:200px; height: 50px; top:120px; left:200px; display: none; border: 1px solid black;" id="uid">
+                            hello
+                        </div> -->
+
+                        <div style="width: 60%; height: 100%;">
+                            
+                            <h3 class="quotes"><span class="bar"> </span>A good printing service can make all the difference in how your printed materials are perceived.</h3>
+                        </div>
+
+                        <div class="navbar">
+                            <a href="#">LOGGED IN</a>
+                        </div>
+                    </div>
+            
+            </div>
+                        <!-- <div class="Header__HeaderRight-sc-hejxrh-3 dVsawd">
+                            <div class="ProfileButton__Container-sc-975teb-3 liSUTa">
+                                <div class="ProfileButton__Text-sc-975teb-2 bFHCDW">Logged In </div>
+                            </div>
+                        </div> -->
+                        <div class="toggle">
+                            <button id="available" class="active">Available</button>
+                            <button id="not-available">Not Available</button>
+                        </div>
+                    
+                        <script>
+                            const availableButton = document.getElementById("available");
+                            const notAvailableButton = document.getElementById("not-available");
+                    
+                            availableButton.addEventListener("click", function() {
+                                availableButton.classList.add("active");
+                                notAvailableButton.classList.remove("active");
+                            });
+                    
+                            notAvailableButton.addEventListener("click", function() {
+                                notAvailableButton.classList.add("active");
+                                availableButton.classList.remove("active");
+                            });
+                        </script>
+                    
+
+    </body>
+
+</html>

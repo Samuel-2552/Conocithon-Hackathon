@@ -17,6 +17,8 @@ app.config['icons'] = images
 logo = os.path.join(app.config['icons'], 'logo.png')
 fav_icon = os.path.join(app.config['icons'], 'fav_icon.png')
 
+latitude = None
+longitude = None
 
 
 @app.route('/')
@@ -29,6 +31,7 @@ def shopkeeper():
 
 @app.route('/update-location', methods=['POST'])
 def update_location():
+    global latitude,longitude
     data = request.get_json()
     geolocator = Nominatim(user_agent="my-app-name")
     latitude = data['latitude']
@@ -91,8 +94,26 @@ def otpt():
         print(e)
         return "failure"
 
+@app.route("/shop_login", methods=['POST'])
+def shop_login():
+    name = request.form.get['username']
+    email = request.form.get['email']
+    pname = request.form.get['pname']
+    con = sqlite3.connect("user.db")
+    cur = con.cursor()
+    
+    # cur.execute("INSERT INTO user (username, email, latitude, longitude, printername) VALUES (?, ?, ?)", (name,email,latitude,longitude,pname))
+    cur.execute("SELECT email from user where email=(?)",(email))
+    data = cur.fetchone()
+    if(len(data) == 1):
+        return render_template("shopkeeper.html",logo=logo,fav_icon=fav_icon)
+    else:
+        cur.execute("INSERT INTO user (username, email, latitude, longitude, printername) VALUES (?, ?, ?)", (name,email,latitude,longitude,pname))
+        return render_template("shopavailable.html", name = name, logo=logo,fav_icon=fav_icon)
+
 
     
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")

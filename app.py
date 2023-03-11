@@ -28,7 +28,18 @@ def update_location():
     print("Longitude", longitude)
     location = geolocator.reverse(f"{latitude}, {longitude}", zoom=18)
     out=location
-    return f"<br>Your Address: {out}"
+
+    out_str = str(out)
+    out_list = out_str.split(',')
+    new_list = out_list[-6:]
+    print(new_list)
+    out = " ".join(new_list)
+    return f"{out}"
+
+# @app.route('/otp-request')
+# def otp_request():
+#     data= request.get_json()
+#     email
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host="0.0.0.0")

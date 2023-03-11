@@ -10,7 +10,7 @@ import random
 smtp_port = 587
 smtp_server = "smtp.gmail.com"
 images=os.path.join('static','images')
-
+otp=""
 app = Flask(__name__)
 app.config['icons'] = images
 
@@ -58,6 +58,7 @@ def OTP():
 
 @app.route('/otp', methods=['POST'])
 def otpt():
+    global otp
     # global simple_email_context
     data = request.get_json()
     email = data['email']
@@ -77,7 +78,7 @@ def otpt():
         # Close the connection
     conn_cred.close()
     try:
-        otp = OTP() + "is your OTP"
+        otp = OTP() + " is your OTP"
         subject = f"Welcome th Printconnect !"
         message = f"{otp}.\nPlease do not share it with anyone."
         simple_email_context = ssl.create_default_context()
@@ -93,6 +94,21 @@ def otpt():
     except Exception as e:
         print(e)
         return "failure"
+    
+@app.route('/otp1', methods=['POST'])
+def otp1():
+    global otp
+    # global simple_email_context
+    data = request.get_json()
+    otp_1 = data['otp']
+    print(otp_1)
+    if (otp1==otp):
+        return "Success"
+    else:
+        return "Failure"
+
+
+
 
 @app.route("/shop_login", methods=['POST'])
 def shop_login():

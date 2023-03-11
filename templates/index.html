@@ -112,7 +112,11 @@
                         </div> -->
                         <div style="display: flex; width: 100%;height: 100%;flex-grow: 1;justify-content: space-around;align-items: center;">
                             <div style="width: 20%; height: 100%;">
-                                <button onclick="getLocation()">Search Location</button>
+                                <button onclick="getLocation()" id="response">Search Location</button>
+                                <p hidden>Latitude: <span id="latitude"></span></p>
+                                <p hidden>Longitude: <span id="longitude"></span></p>
+                                <!-- <button onclick="output()">Update</button> -->
+                                <div ></div>
                             </div>
                             <!-- <div style="position:absolute; width:200px; height: 50px; top:120px; left:200px; display: none; border: 1px solid black;" id="uid">
                                 hello

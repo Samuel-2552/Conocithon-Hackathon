@@ -97,9 +97,10 @@ def otpt():
         # Close the connection
     conn_cred.close()
     try:
-        otp = OTP() + " is your OTP"
+        otp = OTP() 
+        otpp= otp + " is your OTP!"
         subject = f"Welcome th Printconnect !"
-        message = f"{otp}.\nPlease do not share it with anyone."
+        message = f"{otpp}.\nPlease do not share it with anyone."
         simple_email_context = ssl.create_default_context()
         print("Connecting to server...")
         tie_server = smtplib.SMTP(smtp_server,smtp_port)
@@ -120,9 +121,9 @@ def otp1():
     # global simple_email_context
     data = request.get_json()
     otp_1 = data['otp']
-    otp_1 = str(otp_1) +" is your OTP"
     print(otp_1)
-    if (otp1==otp):
+    print(otp_1,otp)
+    if (otp_1==otp):
         return "Success"
     else:
         return "Failure"

@@ -110,22 +110,24 @@ def otp1():
 
 
 
-@app.route("/shop_login", methods=['POST'])
+@app.route("/shop_login", methods=['GET','POST'])
 def shop_login():
-    name = request.form.get['username']
-    email = request.form.get['email']
-    pname = request.form.get['pname']
-    con = sqlite3.connect("user.db")
-    cur = con.cursor()
-    
-    # cur.execute("INSERT INTO user (username, email, latitude, longitude, printername) VALUES (?, ?, ?)", (name,email,latitude,longitude,pname))
-    cur.execute("SELECT email from user where email=(?)",(email))
-    data = cur.fetchone()
-    if(len(data) == 1):
-        return render_template("shopkeeper.html",logo=logo,fav_icon=fav_icon)
-    else:
-        cur.execute("INSERT INTO user (username, email, latitude, longitude, printername) VALUES (?, ?, ?)", (name,email,latitude,longitude,pname))
-        return render_template("shopavailable.html", name = name, logo=logo,fav_icon=fav_icon)
+    if request.method == 'POST':
+        name = request.form['username']
+        email = request.form['email']
+        pname = request.form['pname']
+        con = sqlite3.connect("users.db")
+        cur = con.cursor()
+        
+        # cur.execute("INSERT INTO user (username, email, latitude, longitude, printername) VALUES (?, ?, ?)", (name,email,latitude,longitude,pname))
+        cur.execute("SELECT email from user where email=(?)",(email,))
+        data = cur.fetchone()
+        print(data)
+        if(data):
+            return render_template("shopkeeper.html",logo=logo,fav_icon=fav_icon)
+        else:
+            cur.execute("INSERT INTO user (username, email, latitude, longitude, printername) VALUES (?, ?, ?,?,?)", (name,email,latitude,longitude,pname))
+    return render_template("shopavailable.html", name = name, logo=logo,fav_icon=fav_icon)
 
 
     

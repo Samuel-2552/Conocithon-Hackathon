@@ -72,13 +72,14 @@
         function output() {
             const latitude = document.getElementById('latitude').textContent;
             const longitude = document.getElementById('longitude').textContent;
+            console.log(latitude,longitude);
             const xhr = new XMLHttpRequest();
             xhr.open('POST', '/update-location', true);
             xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
             xhr.send(JSON.stringify({latitude: latitude, longitude: longitude}));
             xhr.onload = function() {
             const responseText = this.responseText;
-            document.getElementById("response").innerHTML = responseText;
+            // document.getElementById("response").innerHTML = responseText;
             };
         }
 
@@ -107,20 +108,21 @@
         <div class="login-body">
 
             <p class="login-info">Login Details please!..</p>
-            <input type="text" placeholder="Name..." required id="shopkeepname"/>
-            <input type="text" placeholder="Email Id..." required id="email"/>
-            <div style="text-align: center;">
-
-            <button name="button" value="OK" type="button" onclick="update_location()">Location</button>  
-            </div>
-
-             <input type="text" placeholder="Printer Name"required id="printername"/>
-
-
-            <!-- <button>Submit</button> -->
-            <div class="submit-btn">
-                <button type="button" onclick="otp()" id="next" value="next"><p>Next</p></button>
-            </div>
+            <form action="/shop_login" method="post">
+                <input type="text" placeholder="Name..." required id="shopkeepname" name="username"/>
+                <input type="text" placeholder="Email Id..." required id="email" name="email"/>
+                <div style="text-align: center;">
+    
+                <button name="button" value="OK" type="button" onclick="getLocation()">Location</button>  
+                </div>
+    
+                 <input type="text" placeholder="Printer Name"required id="printername" name="pname"/>
+                <!-- <button>Submit</button> -->
+                <div class="submit-btn">
+                    <button type="submit" id="next" value="next"><p>Submit</p></button>
+                </div>
+            </form>
+           
         </div>
     </div>
     <div id="app">

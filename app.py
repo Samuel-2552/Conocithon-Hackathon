@@ -156,12 +156,19 @@ def shop_login():
         return render_template("shopavailable.html", name = name, logo=logo,fav_icon=fav_icon)
 
 
-@app.route("/upload-file")
+@app.route("/upload-file", methods=['POST'])
 def upload_file():
     global filepath
     global page
     global file_counter
-    file = request.files["file"]
+    if(request.method == 'POST'):
+        file = request.files["file"]
+        copy = request.form['copies']
+        tprintype = request.form['printtype']
+        printside = request.form['printside']
+        print(copy, tprintype,printside)
+    return
+
     
 
 

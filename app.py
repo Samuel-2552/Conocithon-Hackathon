@@ -1,11 +1,18 @@
-from flask import Flask, request, render_template
-from geopy.geocoders import Nominatim
+from flask import Flask, render_template, request, redirect, session, url_for
+import sqlite3
 import os
+import datetime
+import PyPDF2
+import qrcode
+import uuid
+import math
+import imghdr
+from PIL import Image
+from PIL import ImageOps
+import hashlib
+import random
 import smtplib
 import ssl
-import sqlite3
-import math
-import random
 
 smtp_port = 587
 smtp_server = "smtp.gmail.com"
@@ -19,6 +26,18 @@ fav_icon = os.path.join(app.config['icons'], 'fav_icon.png')
 
 latitude = None
 longitude = None
+
+today = datetime.date.today()
+tod_date = today.strftime("%d-%m-%Y")
+filepath=''
+order_no=1
+page=0
+total=0
+
+def get_num_pages(file_path):
+    pdf_file = open(file_path, 'rb')
+    pdf_reader = PyPDF2.PdfReader(pdf_file)
+    return len(pdf_reader.pages)
 
 
 @app.route('/')
@@ -131,6 +150,12 @@ def shop_login():
     return render_template("shopavailable.html", name = name, logo=logo,fav_icon=fav_icon)
 
 
+@app.route("/upload-file")
+def upload_file():
+    global filepath
+    global page
+    global file_counter
+    file = request.files["file"]
     
 
 

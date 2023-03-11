@@ -49,8 +49,8 @@ def OTP():
         OTP += digits[math.floor(random.random() * 10)]
     return OTP
 
-@app.route('/otp-request')
-def otp_request():
+@app.route('/otp', methods=['POST'])
+def otpt():
     # global simple_email_context
     data = request.get_json()
     email = data['email']
@@ -82,8 +82,10 @@ def otp_request():
         print(f"Sending email to - {email}")
         tie_server.sendmail(email_from, email, f"Subject: {subject}\n\n{message}")
         print(f"Email successfully sent to - {email}")
+        return "success"
     except Exception as e:
         print(e)
+        return "failure"
 
 
     

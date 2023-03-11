@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IR Sensor Value</title>
+</head>
+<body>
+	<h1>Current IR Sensor Value:</h1>
+	<p id="irValue"></p>
+
+	<script>
+		setInterval(getIRValue, 1000);
+
+		function getIRValue() {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "/irvalue", true);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					document.getElementById("irValue").innerHTML = xhr.responseText;
+				}
+			};
+			xhr.send();
+		}
+	</script>
+</body>
+</html>

@@ -13,6 +13,7 @@ import hashlib
 import random
 import smtplib
 import ssl
+from geopy.geocoders import Nominatim
 
 smtp_port = 587
 smtp_server = "smtp.gmail.com"
@@ -128,6 +129,9 @@ def otp1():
     else:
         return "Failure"
 
+@app.route("/customer")
+def customer():
+    return render_template("customer.html",logo=logo,fav_icon=fav_icon)
 
 
 
@@ -148,7 +152,7 @@ def shop_login():
             return render_template("shopkeeper.html",logo=logo,fav_icon=fav_icon)
         else:
             cur.execute("INSERT INTO user (username, email, latitude, longitude, printername) VALUES (?, ?, ?,?,?)", (name,email,latitude,longitude,pname))
-    return render_template("shopavailable.html", name = name, logo=logo,fav_icon=fav_icon)
+        return render_template("shopavailable.html", name = name, logo=logo,fav_icon=fav_icon)
 
 
 @app.route("/upload-file")

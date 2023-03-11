@@ -52,6 +52,36 @@
     <link href="/vendor.256098864b9247760fc2.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{{fav_icon}}">
     <link rel="stylesheet" href="static/style.css"/>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+            alert("Geolocation is not supported by this browser.");
+            }
+        }
+        
+        function showPosition(position) {
+            document.getElementById("latitude").innerHTML = position.coords.latitude;
+            document.getElementById("longitude").innerHTML = position.coords.longitude;
+            output();
+
+        }
+        
+        function output() {
+            const latitude = document.getElementById('latitude').textContent;
+            const longitude = document.getElementById('longitude').textContent;
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/update-location', true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+            xhr.send(JSON.stringify({latitude: latitude, longitude: longitude}));
+            xhr.onload = function() {
+            const responseText = this.responseText;
+            document.getElementById("response").innerHTML = responseText;
+            };
+        }
+    </script>
 </head>
 
 <body class="spicy-tailwind" style="margin:0">
@@ -82,7 +112,7 @@
                         </div> -->
                         <div style="display: flex; width: 100%;height: 100%;flex-grow: 1;justify-content: space-around;align-items: center;">
                             <div style="width: 20%; height: 100%;">
-                                    
+                                <button onclick="getLocation()">Search Location</button>
                             </div>
                             <!-- <div style="position:absolute; width:200px; height: 50px; top:120px; left:200px; display: none; border: 1px solid black;" id="uid">
                                 hello
@@ -220,7 +250,7 @@
     <script src="/6740.scripts/print.8a707047645afb5bec38.js"></script>
     <script defer="defer" src="/rudder-analytics.js"></script>
     <script defer="defer" async src="https://www.zomato.com/zpaykit/js/v5/hook.js"></script>
-    <script src="script.js"></script>
+    <script src="static/script.js"></script>
 </body>
 
 </html>

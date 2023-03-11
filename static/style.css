@@ -14,7 +14,21 @@
     /* height:fit-content; */
     overflow: visible;
 }
-
+#shopkeeper{
+    width: 150%;
+    height: 150%;
+    background-color: rgb(12, 131, 31);
+    border:none;
+    margin: auto;
+    display: block;
+    margin-top: 7%;    
+    overflow: hidden; 
+    color:whitesmoke;
+}
+#shopkeeper:hover{
+    /* height:fit-content; */
+    overflow: visible;
+}
 .bar{
     width: 10px;
     height: 10%;

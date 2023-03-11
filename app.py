@@ -1,8 +1,14 @@
 from flask import Flask, request, render_template
 from geopy.geocoders import Nominatim
 import os
+import smtplib
+import ssl
+import sqlite3
+import math
+import random
 
-
+smtp_port = 587
+smtp_server = "smtp.gmail.com"
 images=os.path.join('static','images')
 
 app = Flask(__name__)
@@ -36,10 +42,51 @@ def update_location():
     out = " ".join(new_list)
     return f"{out}"
 
-# @app.route('/otp-request')
-# def otp_request():
-#     data= request.get_json()
-#     email
+def OTP():
+    digits = "0123456789"
+    OTP = ""
+    for i in range(6):
+        OTP += digits[math.floor(random.random() * 10)]
+    return OTP
+
+@app.route('/otp-request')
+def otp_request():
+    # global simple_email_context
+    data = request.get_json()
+    email = data['email']
+    conn_cred = sqlite3.connect('cred.db')
+
+    # Create a cursor
+    cursor_cred = conn_cred.cursor()
+
+        # Execute an SQL command to retrieve the first row from the user table
+    cursor_cred.execute('SELECT * FROM user LIMIT 1')
+
+        # Fetch the first row and print it
+    row = cursor_cred.fetchone()
+    email_from=row[1]
+    decrypted=row[2]
+
+        # Close the connection
+    conn_cred.close()
+    try:
+        otp = OTP() + "is your OTP"
+        subject = f"Welcome th Printconnect !"
+        message = f"{otp}.\nPlease do not share it with anyone."
+        simple_email_context = ssl.create_default_context()
+        print("Connecting to server...")
+        tie_server = smtplib.SMTP(smtp_server,smtp_port)
+        tie_server.starttls(context=simple_email_context)
+        tie_server.login(email_from, decrypted)
+        print()
+        print(f"Sending email to - {email}")
+        tie_server.sendmail(email_from, email, f"Subject: {subject}\n\n{message}")
+        print(f"Email successfully sent to - {email}")
+    except Exception as e:
+        print(e)
+
+
+    
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")

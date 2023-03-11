@@ -95,6 +95,26 @@
                     document.getElementById('next').value='Submit'
                 }
             }
+            var myDiv = document.getElementById("login-body");
+            myDiv.style.display = "none";  
+            var myDiv = document.getElementById("login-verify");
+            myDiv.style.display = "block";
+        }
+
+        function otp1(){
+            if(document.getElementById('next1').value == 'next1'){
+                
+                var otp1 = document.getElementById('otp1').value
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST','/otp1', true);
+                xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+                xhr.send(JSON.stringify({otp: otp1}));
+                xhr.onload = function(){
+                    const response = this.response;
+                    console.log(response);
+                    document.getElementById('next1').value='Submit'
+                }
+            }
         }
     </script>
 </head>
@@ -104,13 +124,21 @@
         <div class="login-title">
             <center><h2 class="title">E-Mail Verification</h2></center>
         </div>
-        <div class="login-body">
+        <div class="login-body" id="login-body">
             <p class="login-info">Enter your Email to login/signup</p>
             <input type="text" placeholder="Email Id..." required id="email"/>
-            <input type="text" placeholder="OTP" disabled required id="otp"/>
+            
             <!-- <button>Submit</button> -->
             <div class="submit-btn">
                 <button type="button" onclick="otp()" id="next" value="next"><p>Next</p></button>
+            </div>
+        </div>
+        <div class="login-verify" id="login-verify" hidden>
+            <p class="login-info">Enter the OTP sent to your mail!</p>
+            <input type="text" placeholder="OTP"  required id="otp1"/>
+            <!-- <button>Submit</button> -->
+            <div class="submit-btn">
+                <button type="button" onclick="otp1()" id="next1" value="next1"><p>Next</p></button>
             </div>
         </div>
     </div>

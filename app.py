@@ -161,13 +161,14 @@ def upload_file():
     global filepath
     global page
     global file_counter
-    if(request.method == 'POST'):
-        file = request.files["file"]
-        copy = request.form['copies']
-        tprintype = request.form['printtype']
-        printside = request.form['printside']
-        print(copy, tprintype,printside)
-    return
+    return render_template('payment.html')
+    # if(request.method == 'POST'):
+    #     file = request.files["file"]
+    #     copy = request.form['copies']
+    #     tprintype = request.form['printtype']
+    #     printside = request.form['printside']
+    #     print(copy, tprintype,printside)
+    #     return render_template('payment.html')
 
     
 

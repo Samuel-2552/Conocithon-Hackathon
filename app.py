@@ -97,11 +97,16 @@ def otpt():
     
 @app.route('/otp1', methods=['POST'])
 def otp1():
+    global otp
     # global simple_email_context
     data = request.get_json()
     otp_1 = data['otp']
     print(otp_1)
-    
+    if (otp1==otp):
+        return "Success"
+    else:
+        return "Failure"
+
 
 
 

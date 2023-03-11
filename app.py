@@ -101,6 +101,7 @@ def otp1():
     # global simple_email_context
     data = request.get_json()
     otp_1 = data['otp']
+    otp_1 = str(otp_1) +" is your OTP"
     print(otp_1)
     if (otp1==otp):
         return "Success"

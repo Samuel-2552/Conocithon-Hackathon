@@ -23,6 +23,10 @@ fav_icon = os.path.join(app.config['icons'], 'fav_icon.png')
 def index():
     return render_template('index.html',logo=logo,fav_icon=fav_icon)
 
+@app.route('/shopkeeper')
+def shopkeeper():
+    return render_template('shopkeeper.html',logo=logo,fav_icon=fav_icon)
+
 @app.route('/update-location', methods=['POST'])
 def update_location():
     data = request.get_json()

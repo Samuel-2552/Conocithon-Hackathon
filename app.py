@@ -159,9 +159,10 @@ def shop_login():
 @app.route("/upload-file", methods=['POST'])
 def upload_file():
     if(request.method == 'POST'):
+        global page
+        file = request.files['file']
+        file.save(file.filename)
         return render_template('payment.html')
-
-    
 
 
 if __name__ == '__main__':

@@ -31,7 +31,9 @@
       // Create an image tag with the QR code data as the source
       const img = document.createElement("img");
       img.src = qr.createDataURL();
-
+      document.addEventListener('click', function(){
+        window.alert("payment successfull")
+      })
       // Add the image tag to the QR code element
       qrCode.appendChild(img);
     </script>

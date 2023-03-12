@@ -3,6 +3,18 @@
   <head>
     <title>QR Code Generator</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <style>
+      #qr-code {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      img {
+        width: 80%;
+        max-width: 600px;
+      }
+    </style>
   </head>
   <body>
     <div id="qr-code"></div>
@@ -11,19 +23,14 @@
       // Get the element where we want to display the QR code
       const qrCode = document.getElementById("qr-code");
 
-      // Set the options for the QR code (size and error correction level)
-      const options = {
-        width: 300, // Set the width of the QR code to 300 pixels
-        height: 300, // Set the height of the QR code to 300 pixels
-        correctLevel: qrcodegen.QRErrorCorrectLevel.H, // Use the highest error correction level
-      };
-
       // Generate the QR code using the qrcode library
-      const qr = qrcodegen.createQrCode("https://example.com", options);
+      const qr = qrcode(0, "M");
+      qr.addData("https://example.com");
+      qr.make();
 
       // Create an image tag with the QR code data as the source
       const img = document.createElement("img");
-      img.src = qr.toSvgString(0);
+      img.src = qr.createDataURL();
 
       // Add the image tag to the QR code element
       qrCode.appendChild(img);

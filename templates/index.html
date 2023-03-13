@@ -112,6 +112,9 @@
                 xhr.onload = function(){
                     const response = this.response;
                     console.log(response);
+                    if(response === 'Success'){
+                        window.location.href="http://127.0.0.1:5000/customer"
+                    }
                     document.getElementById('next1').value='Submit'
                 }
             }
@@ -181,12 +184,13 @@
                                 hello
                             </div> -->
 
-                            <div style="width: 60%; height: 100%;">
+                             <div style="width: 60%; height: 100%;">
                                 <h3 class="quotes"><span class="bar"> </span>A good printing service can make all the difference in how your printed materials are perceived.</h3>
-                            </div>
+                            </div> 
 
                             <div>
                                 <form action="/shopkeeper" method="get">
+                                    <br>
                                     <button type="submit"id="shopkeeper">Shopkeeper</button>
                                 </form>
                             </div>

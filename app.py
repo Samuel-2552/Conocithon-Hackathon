@@ -132,6 +132,9 @@ def shop_login():
     return render_template("shopavailable.html", name = name, logo=logo,fav_icon=fav_icon)
 
 
+@app.route("/print", methods=['GET','POST'])
+def printing():
+    file="D:\Github\Conocithon-Hackathon\static\files\Leave Letter.pdf"
     
 
 
